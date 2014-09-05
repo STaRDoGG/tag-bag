@@ -134,18 +134,21 @@ class tagbag_Admin_Autocomplete {
 	 * @author Amaury Balmer
 	 */
 	public static function add_meta_boxes( $post_type ) {
+/*  Removed this all: I didn't see any real diff between the "adv" and WordPress's default Tags meta boxes
 		$taxonomies = get_object_taxonomies( $post_type );
 		if ( in_array('post_tag', $taxonomies) ) {
 			if ( $post_type == 'page' && !is_page_have_tags() )
 				return false;
 
-/* UNTESTED FOR BUGS: Restores the original Tags Meta box, while still allowing the Tag Bag Advanced Meta Box as well */
-/*			remove_meta_box( 'post_tag'.'div', $post_type, 'side' );
-			remove_meta_box( 'tagsdiv-'.'post_tag', $post_type, 'side' );*/
+			// Removes the default WordPress Tags metabox
+			remove_meta_box( 'post_tag'.'div', $post_type, 'side' );
+			remove_meta_box( 'tagsdiv-'.'post_tag', $post_type, 'side' );
 
+			// Adds an "Advanced" tags meta box
 			add_meta_box('adv-tagsdiv', __('Tags (Tag Bag)', 'tagbag'), array(__CLASS__, 'metabox'), $post_type, 'side', 'core', array('taxonomy'=>'post_tag') );
 			return true;
 		}
+*/
 		return false;
 	}
 
@@ -167,7 +170,7 @@ class tagbag_Admin_Autocomplete {
 				<input type="text" class="widefat" name="adv-tags-input" id="adv-tags-input" value="<?php echo esc_attr(tagbag_Admin::getTermsToEdit( 'post_tag', $post->ID )); ?>" />
 			<?php endif; ?>
 
-			<?php _e('Separate with commas', 'tagbag'); ?>
+			<?php _e('Separate tags with commas', 'tagbag'); ?>
 		</p>
 		<script type="text/javascript">
 			<!--
@@ -178,7 +181,7 @@ class tagbag_Admin_Autocomplete {
 	}
 
 	/**
-	 * public static function called on auto-terms page
+	 * public static function called on auto terms page
 	 *
 	 * @param string $taxonomy
 	 * @return void

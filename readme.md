@@ -99,7 +99,7 @@ Best bet if you're already using Simple Tags is to:
 
 * Version 2.3.3 (First release of "Tag Bag")
 	* This version includes the additions by SpazioDati (https://github.com/SpazioDati/simple-tags) as of Feb 07, 2014, to include dataTXT suggestions.
-	* Restores the default WordPress Tags Meta box without removing the Advanced Tags metabox. Thus far untested for any conflicts.
+	* Restores the default WordPress Tags Meta box, since I didn't notice any real difference between it and the one added by Simple Tags, and I preferred the WordPress version. (Thus far not fully tested for any conflicts).
 	* Tool-tips on tags when adding to a post show the count that tag currently has. Also shows the tag's description if one has been added.
 	* Renamed all of the "st-", "st_" ID's and Classes to "tb_", "tb_" so that Simple Tags and Tag Bag can be installed at the same time (untested). One bonus to this is it should automatically resolve the conflict with the ShareThis plugin.
 	* Removed the tabs in admin that just said certain features were removed.
