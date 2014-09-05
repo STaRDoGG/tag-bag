@@ -5,11 +5,12 @@
 **Tested up to:** 4.0
 **Stable tag:** 2.3.3
 
-**Add some tools for taxonomies :** Terms suggestion, Mass Edit Terms, Auto link Terms, Ajax Autocompletion, Click Terms, Auto terms, Advanced manage terms, Advanced Post Terms, Related Posts by Terms, etc.
+**Add some tools for taxonomies:** Terms suggestion, Mass Edit Terms, Auto link Terms, Ajax Autocompletion, Click Terms, Auto terms, Advanced manage terms, Advanced Post Terms, Related Posts by Terms, etc.
 
-## BEFORE UNINSTALLING SIMPLE TAGS MAKE A BACKUP OF YOUR DATABASE! I'm not repsonsible for any losses, it's all on you. ##
+## BEFORE UNINSTALLING SIMPLE TAGS MAKE A BACKUP OF YOUR DATABASE! ##
+I'm not repsonsible for any losses, it's all on you.
 
-Tag Bag is a fork of the Simple Tags Plugin by Amaury Balmer.
+Tag Bag is a fork of the Simple Tags Plugin by Amaury Balmer (http://wordpress.org/plugins/simple-tags).
 
 It is mostly intended to build upon the original plugin for my personal websites' own needs, and will be updated/fixed as necessary. Considering it is free software, and I have a very small amount of time to focus on this plugin alone (in fact it's NOT a focus of mine =) ), updates will probably be sporadic, and anyone with the ability, and knowledge of any fixes and/or enhancements is highly encouraged to either tell me exactly what to add/fix, or do it yourself and I'll merge it into this. Demanding people will be ignored, lol.
 
@@ -29,7 +30,7 @@ Best bet if you're already using Simple Tags is to:
 
 * Deactivate (but not uninstall) the Simple Tags plugin.
 * Install the Tag Bag Plugin & activate it.
-** Keep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
+  *eep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
 
 * If you're a first time user, just install as you would any WordPress plugin.
 
