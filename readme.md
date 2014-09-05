@@ -8,7 +8,7 @@
 **Add some tools for taxonomies:** Terms suggestion, Mass Edit Terms, Auto link Terms, Ajax Autocompletion, Click Terms, Auto terms, Advanced manage terms, Advanced Post Terms, Related Posts by Terms, etc.
 
 ## BEFORE UNINSTALLING SIMPLE TAGS MAKE A BACKUP OF YOUR DATABASE! ##
-I'm not repsonsible for any losses, it's all on you.
+I'm not responsible for any losses, it's all on you.
 
 Tag Bag is a fork of the Simple Tags Plugin by Amaury Balmer (http://wordpress.org/plugins/simple-tags).
 
@@ -30,9 +30,9 @@ Best bet if you're already using Simple Tags is to:
 
 * Deactivate (but not uninstall) the Simple Tags plugin.
 * Install the Tag Bag Plugin & activate it.
-  *eep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
+	* Keep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
 
-* If you're a first time user, just install as you would any WordPress plugin.
+* If you're a first time user, just install as you would any WordPress plugin. (#installation)
 
 ## Original (un-updated) Description ##
 
