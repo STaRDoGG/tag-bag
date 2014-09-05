@@ -24,16 +24,6 @@ I also haven't fixed any of the reported bugs since Amaury's last release. I've 
 
 However, if you've had a problem with a conflict between the ShareThis plugin and Simple Tags plugin, there's a strong chance Tag Bag fixed it.
 
-## Installing: ##
-
-Best bet if you're already using Simple Tags is to:
-
-* Deactivate (but not uninstall) the Simple Tags plugin.
-* Install the Tag Bag Plugin & activate it.
-	* Keep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
-
-* If you're a first time user, just install as you would any WordPress plugin. (#installation)
-
 ## Original (un-updated) Description ##
 
 **This is THE perfect tool to manage perfectly your WP terms for any taxonomy**
@@ -62,9 +52,17 @@ And more...
 
 ## Installation ##
 
-**Required PHP5.**
+**Required PHP5**
 
 The Simple Tags can be installed in 3 easy steps:
+
+Best bet if you're already using Simple Tags is to:
+
+* Deactivate (but not uninstall) the Simple Tags plugin.
+* Install the Tag Bag Plugin & activate it.
+	* Keep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
+
+* If you're a first time user, just install as you would any WordPress plugin ...
 
 1. Unzip "Simple tags" archive and put all files into a folder like "/wp-content/plugins/simple-tags/"
 2. Activate the plugin through the 'Plugins' menu in WordPress
