@@ -22,7 +22,7 @@ class tagbag_Admin_Post_Settings {
 	 * @author Amaury Balmer
 	 */
 	public static function add_meta_boxes( $post_type ) {
-		add_meta_box('tagbag-settings', __('Tag Bag - Settings', 'tagbag'), array(__CLASS__, 'metabox'), $post_type, 'side', 'low' );
+		add_meta_box('tagbag-settings', __('Tag Bag (Settings)', 'tagbag'), array(__CLASS__, 'metabox'), $post_type, 'side', 'low' );
 	}
 
 	/**
@@ -36,11 +36,11 @@ class tagbag_Admin_Post_Settings {
 		// Get auto options
 		$auto_options = get_option( TAGB_OPTIONS_NAME_AUTO );
 
-		// Auto terms for this CPT ?
+		// Auto terms for this CPT?
 		if ( (int) tagbag_Plugin::get_option_value('active_autotags') == 1 && isset($auto_options[$post->post_type]) && !empty($auto_options[$post->post_type]) ) {
 			$meta_value = get_post_meta( $post->ID, '_exclude_autotags', true );
 			echo '<p>' . "\n";
-				echo '<label><input type="checkbox" name="exclude_autotags" value="true" '.checked($meta_value, true, false).' /> '.__('Disable auto tags ?', 'tagbag').'</label><br />' . "\n";
+				echo '<label><input type="checkbox" name="exclude_autotags" value="true" '.checked($meta_value, true, false).' /> '.__('Disable Auto-Tags?', 'tagbag').'</label><br />' . "\n";
 			echo '</p>' . "\n";
 			echo '<input type="hidden" name="_meta_autotags" value="true" />';
 		}
@@ -49,14 +49,14 @@ class tagbag_Admin_Post_Settings {
 		if( (int) tagbag_Plugin::get_option_value('auto_link_tags') == 1 && in_array('post_tag', $taxonomies) ) {
 			$meta_value = get_post_meta( $post->ID, '_exclude_autolinks', true );
 			echo '<p>' . "\n";
-				echo '<label><input type="checkbox" name="exclude_autolinks" value="true" '.checked($meta_value, true, false).' /> '.__('Disable auto links ?', 'tagbag').'</label><br />' . "\n";
+				echo '<label><input type="checkbox" name="exclude_autolinks" value="true" '.checked($meta_value, true, false).' /> '.__('Disable Auto-Links?', 'tagbag').'</label><br />' . "\n";
 			echo '</p>' . "\n";
 			echo '<input type="hidden" name="_meta_autolink" value="true" />';
 		}
 	}
 
 	/**
-	 * Save this settings in post meta, delete if no exclude, clean DB :)
+	 * Save these settings in post meta, delete if no exclude, clean DB :)
 	 *
 	 * @param integer $object_id
 	 * @return void

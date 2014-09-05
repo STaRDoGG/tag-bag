@@ -114,7 +114,7 @@ class tagbag_Admin_Autocomplete {
 			// Remove empty and trim tag
 			$tags = array_filter($tags, '_delete_empty_element');
 
-			// Add new tag (no append ! replace !)
+			// Add new tag (no append! replace!)
 			wp_set_object_terms( $post_id, $tags, 'post_tag' );
 
 			// Clean cache
@@ -139,8 +139,9 @@ class tagbag_Admin_Autocomplete {
 			if ( $post_type == 'page' && !is_page_have_tags() )
 				return false;
 
-			remove_meta_box( 'post_tag'.'div', $post_type, 'side' );
-			remove_meta_box( 'tagsdiv-'.'post_tag', $post_type, 'side' );
+/* UNTESTED FOR BUGS: Restores the original Tags Meta box, while still allowing the Tag Bag Advanced Meta Box as well */
+/*			remove_meta_box( 'post_tag'.'div', $post_type, 'side' );
+			remove_meta_box( 'tagsdiv-'.'post_tag', $post_type, 'side' );*/
 
 			add_meta_box('adv-tagsdiv', __('Tags (Tag Bag)', 'tagbag'), array(__CLASS__, 'metabox'), $post_type, 'side', 'core', array('taxonomy'=>'post_tag') );
 			return true;
@@ -166,7 +167,7 @@ class tagbag_Admin_Autocomplete {
 				<input type="text" class="widefat" name="adv-tags-input" id="adv-tags-input" value="<?php echo esc_attr(tagbag_Admin::getTermsToEdit( 'post_tag', $post->ID )); ?>" />
 			<?php endif; ?>
 
-			<?php _e('Separate tags with commas', 'tagbag'); ?>
+			<?php _e('Separate with commas', 'tagbag'); ?>
 		</p>
 		<script type="text/javascript">
 			<!--
@@ -177,7 +178,7 @@ class tagbag_Admin_Autocomplete {
 	}
 
 	/**
-	 * public static function called on auto terms page
+	 * public static function called on auto-terms page
 	 *
 	 * @param string $taxonomy
 	 * @return void

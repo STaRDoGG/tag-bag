@@ -83,7 +83,7 @@ Best bet if you're already using Simple Tags is to:
 ###1. A example tag cloud (with dynamic color and size)###
 ![A example tag cloud (with dynamic color and size)](http://s.wordpress.org/extend/plugins/simple-tags/screenshot-1.png)
 
-**2. Do you have a not yet tagged blog ? Edit mass tags options is perfect for you :** tag 20, 30 or 50 articles with autocompletion in one step !
+**2. Do you have a not yet tagged blog? Edit mass tags options is perfect for you :** tag 20, 30 or 50 articles with autocompletion in one step!
 ###2. Autotagging your content !###
 ![Autotagging your content !](http://s.wordpress.org/extend/plugins/simple-tags/screenshot-2.png)
 
@@ -97,6 +97,13 @@ Best bet if you're already using Simple Tags is to:
 
 ## Changelog ##
 
+* Version 2.3.3 (First release of "Tag Bag")
+	* This version includes the additions by SpazioDati (https://github.com/SpazioDati/simple-tags) as of Feb 07, 2014, to include dataTXT suggestions.
+	* Restores the default WordPress Tags Meta box without removing the Advanced Tags metabox. Thus far untested for any conflicts.
+	* Tool-tips on tags when adding to a post show the count that tag currently has. Also shows the tag's description if one has been added.
+	* Renamed all of the "st-", "st_" ID's and Classes to "tb_", "tb_" so that Simple Tags and Tag Bag can be installed at the same time (untested). One bonus to this is it should automatically resolve the conflict with the ShareThis plugin.
+	* Removed the tabs in admin that just said certain features were removed.
+	* Many other things that I can't recall off the top of my head. I'll add them as I recall them.
 * Version 2.3.2
 	* Move all get_option request into plugin class, use static
 	* Add option for limit autolinks to singular view (default setting, you need change this setting in DB for enable autolinks into all views)
