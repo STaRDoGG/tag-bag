@@ -1,5 +1,5 @@
 <?php
-class SimpleTags_Plugin {
+class tagbag_Plugin {
 
 	static $options = null;
 
@@ -11,26 +11,26 @@ class SimpleTags_Plugin {
 	 */
 	public static function activation() {
 		// Put default options
-		$options_from_table = get_option( STAGS_OPTIONS_NAME );
+		$options_from_table = get_option( TAGB_OPTIONS_NAME );
 		if ( $options_from_table == false ) {
-			$options = (array) include( STAGS_DIR . '/inc/helper.options.default.php' );
-			add_option( STAGS_OPTIONS_NAME, $options );
+			$options = (array) include( TAGB_DIR . '/inc/helper.options.default.php' );
+			add_option( TAGB_OPTIONS_NAME, $options );
 			unset( $options );
 		}
 
 		// Init roles
 		if ( function_exists( 'get_role' ) ) {
 			$role = get_role( 'administrator' );
-			if ( $role != null && !$role->has_cap( 'simple_tags' ) ) {
-				$role->add_cap( 'simple_tags' );
+			if ( $role != null && !$role->has_cap( 'tag_bag' ) ) {
+				$role->add_cap( 'tag_bag' );
 			}
-			if ( $role != null && !$role->has_cap( 'admin_simple_tags' ) ) {
-				$role->add_cap( 'admin_simple_tags' );
+			if ( $role != null && !$role->has_cap( 'admin_tag_bag' ) ) {
+				$role->add_cap( 'admin_tag_bag' );
 			}
 
 			$role = get_role( 'editor' );
-			if ( $role != null && !$role->has_cap( 'simple_tags' ) ) {
-				$role->add_cap( 'simple_tags' );
+			if ( $role != null && !$role->has_cap( 'tag_bag' ) ) {
+				$role->add_cap( 'tag_bag' );
 			}
 
 			// Clean var
@@ -39,11 +39,11 @@ class SimpleTags_Plugin {
 	}
 
 	public static function deactivation() {
-		
+
 	}
 
 	private static function _load_option() {
-		self::$options = wp_parse_args( (array) get_option( STAGS_OPTIONS_NAME ), (array) include( STAGS_DIR . '/inc/helper.options.default.php' ) );
+		self::$options = wp_parse_args( (array) get_option( TAGB_OPTIONS_NAME ), (array) include( TAGB_DIR . '/inc/helper.options.default.php' ) );
 	}
 
 	public static function get_option() {
@@ -83,9 +83,9 @@ class SimpleTags_Plugin {
 			self::update_option();
 		}
 	}
-	
+
 	public static function set_default_option() {
-		self::$options = (array) include( STAGS_DIR . '/inc/helper.options.default.php' );
+		self::$options = (array) include( TAGB_DIR . '/inc/helper.options.default.php' );
 		self::update_option();
 	}
 
@@ -94,7 +94,7 @@ class SimpleTags_Plugin {
 			self::_load_option();
 		}
 
-		return update_option( STAGS_OPTIONS_NAME, self::$options );
+		return update_option( TAGB_OPTIONS_NAME, self::$options );
 	}
 
 }

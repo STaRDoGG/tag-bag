@@ -2,7 +2,7 @@
 jQuery(document).ready(function($) {
 	// Hide all by default
 	$('.group').hide();
-	
+
 	// Display active group
 	var activetab = '';
 	if (typeof(localStorage) != 'undefined') {
@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 	} else {
 		$('.group:first').fadeIn();
 	}
-	console.log(activetab);
+	//console.log(activetab);
 
 	if (activetab != '' && $(activetab + '-tab').length) {
 		$(activetab + '-tab').addClass('nav-tab-active');
@@ -80,4 +80,4 @@ function cloudMinColor() {
 	jQuery('div.cloud_min_color').css({
 		backgroundColor: jQuery('input#cloud_min_color').val()
 	});
-}	
+}

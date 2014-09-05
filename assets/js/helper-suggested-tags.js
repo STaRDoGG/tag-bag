@@ -1,77 +1,88 @@
 jQuery(document).ready(function() {
-	jQuery("#suggestedtags h3.hndle span").html( html_entity_decode(stHelperSuggestedTagsL10n.title_bloc) );
-	jQuery("#suggestedtags .inside .container_clicktags").html( stHelperSuggestedTagsL10n.content_bloc );
-	
+	jQuery("#suggestedtags h3.hndle span").html( html_entity_decode(tbHelperSuggestedTagsL10n.title_bloc) );
+	jQuery("#suggestedtags .inside .container_clicktags").html( tbHelperSuggestedTagsL10n.content_bloc );
+
 	// OpenCalais API
 	jQuery("a.opencalais_api").click(function(event) {
 		event.preventDefault();
-	
-		jQuery('#st_ajax_loading').show();
-		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=simpletags&st_action=tags_from_opencalais', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_opencalais', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
 			registerClickTags();
 		});
 		return false;
 	});
-	
+
 	// Alchemy API
 	jQuery("a.alchemyapi").click(function(event) {
 		event.preventDefault();
-	
-		jQuery('#st_ajax_loading').show();
-		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=simpletags&st_action=tags_from_alchemyapi', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_alchemyapi', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
 			registerClickTags();
 		});
 		return false;
 	});
-	
+
 	// Zemanta API
 	jQuery("a.zemanta").click(function(event) {
 		event.preventDefault();
-	
-		jQuery('#st_ajax_loading').show();
-		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=simpletags&st_action=tags_from_zemanta', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_zemanta', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
 			registerClickTags();
 		});
 		return false;
 	});
-	
+
 	// Yahoo API
 	jQuery("a.yahoo_api").click(function(event) {
 		event.preventDefault();
-	
-		jQuery('#st_ajax_loading').show();
-		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=simpletags&st_action=tags_from_yahoo', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_yahoo', {content:getContentFromEditor(),title:jQuery("#title").val(),tags:jQuery("#tags-input").val()}, function(){
 			registerClickTags();
 		});
 		return false;
 	});
-	
+
 	// Tag The Net API
 	jQuery("a.ttn_api").click(function(event) {
 		event.preventDefault();
-	
-		jQuery('#st_ajax_loading').show();
-		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=simpletags&st_action=tags_from_tagthenet', {content:getContentFromEditor(),title:jQuery("#title").val()}, function(){
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_tagthenet', {content:getContentFromEditor(),title:jQuery("#title").val()}, function(){
 			registerClickTags();
 		});
 		return false;
 	});
-	
+
 	// Local Tags Database
 	jQuery("a.local_db").click(function(event) {
 		event.preventDefault();
-	
-		jQuery('#st_ajax_loading').show();
-		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=simpletags&st_action=tags_from_local_db', {content:getContentFromEditor(),title:jQuery("#title").val()}, function(){
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_local_db', {content:getContentFromEditor(),title:jQuery("#title").val()}, function(){
 			registerClickTags();
 		});
 		return false;
+	});
+
+	// dataTXT
+	jQuery("a.datatxt").click(function(event) {
+		event.preventDefault();
+
+		jQuery('#tb_ajax_loading').show();
+		jQuery("#suggestedtags .container_clicktags").load( ajaxurl + '?action=tagbag&tb_action=tags_from_datatxt', {content:getContentFromEditor(),title:jQuery("#title").val()}, function(){
+			registerClickTags();
+		});
+	return false;
 	});
 });
 
 function getContentFromEditor() {
 	var data = '';
-	
+
 	if ( (typeof tinyMCE != "undefined") && tinyMCE.activeEditor && !tinyMCE.activeEditor.isHidden() ) { // Tiny MCE
 		var ed = tinyMCE.activeEditor;
 		if ( 'mce_fullscreen' == ed.id ) {
@@ -87,24 +98,23 @@ function getContentFromEditor() {
 	} else { // No editor, just quick tags
 		data = jQuery("#content").val();
 	}
-	
+
 	// Trim data
 	data = data.replace( /^\s+/, '' ).replace( /\s+$/, '' );
 	if ( data != '' ) {
 		data = strip_tags(data);
 	}
-	
+
 	return data;
 }
 
 function registerClickTags() {
 	jQuery("#suggestedtags .container_clicktags span").click(function(event) {
 		event.preventDefault();
-	
 		addTag(this.innerHTML);
 	});
-	
-	jQuery('#st_ajax_loading').hide();
+
+	jQuery('#tb_ajax_loading').hide();
 	if ( jQuery('#suggestedtags .inside').css('display') != 'block' ) {
 		jQuery('#suggestedtags').toggleClass('closed');
 	}

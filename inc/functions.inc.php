@@ -14,7 +14,7 @@ function _delete_empty_element( &$element ) {
 }
 
 /**
- * Test if page have tags or not...
+ * Test if page has any tags
  *
  * @return boolean
  * @author Amaury Balmer
@@ -24,6 +24,5 @@ function is_page_have_tags() {
 	if ( in_array('post_tag', $taxonomies) ) {
 		return true;
 	}
-	
 	return false;
 }
