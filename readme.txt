@@ -1,19 +1,45 @@
-=== Simple Tags ===
-Contributors: momo360modena
-Donate link: http://beapi.fr/donate/
+=== Tag Bag ===
 Tags: tag, posts, tags, admin, administration, tagging, navigation, terms, taxonomy
 Requires at least: 3.3
-Tested up to: 3.5.1
-Stable tag: 2.3.2
+Tested up to: 4.0
+Stable tag: 2.3.3
 
 Add some tools for taxonomies : Terms suggestion, Mass Edit Terms, Auto link Terms, Ajax Autocompletion, Click Terms, Auto terms, Advanced manage terms, Advanced Post Terms, Related Posts by Terms, etc.
 
 == Description ==
 
-Simple Tags is the successor of Simple Tagging Plugin
+BEFORE UNINSTALLING SIMPLE TAGS MAKE A BACKUP OF YOUR DATABASE! I'm not repsonsible for any losses, it's all on you.
+
+Tag Bag is a fork of the Simple Tags Plugin by Amaury Balmer.
+
+It is mostly intended to build upon the original plugin for my personal websites' own needs, and will be updated/fixed as necessary. Considering it is free software, and I have a very small amount of time to focus on this plugin alone (in fact it's NOT a focus of mine =) ), updates will probably be sporadic, and anyone with the ability, and knowledge of any fixes and/or enhancements is highly encouraged to either tell me exactly what to add/fix, or do it yourself and I'll merge it into this. Demanding people will be ignored, lol.
+
+Also note: none to the documentation has been updated yet, as well as not listing any of the newe changes or updates, and may take time to get to. Feel free to update it yourself.
+
+Changing from Simple Tags to Tag Bag:
+
+I have done my best to make sure that you can simply disable Simple Tags, and install/activate Tag Bag and all of your original stuff will still be the same as before. Except(!) places where you may have used the shortcode to include the tag cloud will need to be changed from "st_" to "tb_".
+
+I also haven't fixed any of the reported bugs since Amaury's last release. I've only made changes to the things pertinent to my own site(s). If you know the fix to any of the reported bugs/issues, you're encouraged to fill me in so I can add it.
+
+However, if you've had a problem with a conflict between the ShareThis plugin and Simple Tags plugin, there's a strong chance Tag Bag fixed it.
+
+Installing:
+
+Best bet if you're already using Simple Tags is to:
+
+Deactivate (but not uninstall) the Simple Tags plugin.
+Install the Tag Bag Plugin & activate it.
+
+Keep it that way until you're sure there are no issues, etc., and if you're happy after awhile just manually delete the Simple Tags folder from your server, this way you won't accidentally uninstall any database stuff that Tag Bag is still using.
+
+If you're a first time user, just install as you would any WordPress plugin.
+
+-- Original (un-updated) Description --
+
 **This is THE perfect tool to manage perfectly your WP terms for any taxonomy**
 
-It was written with this philosophy : best performances, more secured and brings a lot of new functions
+It was written with this philosophy: best performances, more secured and brings a lot of new functions
 
 This plugin is developped on WordPress 3.3, with the constant WP_DEBUG to TRUE.
 
@@ -39,15 +65,15 @@ And more...
 
 **Required PHP5.**
 
-The Simple Tags can be installed in 3 easy steps:
+The Tag Bag can be installed in 3 easy steps:
 
-1. Unzip "Simple tags" archive and put all files into a folder like "/wp-content/plugins/simple-tags/"
+1. Unzip "Tag Bag" archive and put all files into a folder like "/wp-content/plugins/simple-tags/"
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Inside the Wordpress admin, go to Options > Simple Tags, adjust the parameters according to your needs, and save them.
+3. Inside the Wordpress admin, go to Options > Tag Bag, adjust the parameters according to your needs, and save them.
 
 == Frequently Asked Questions ==
 
-= Simple Tags is compatible with which WordPress versions ? =
+= Tag Bag is compatible with which WordPress versions ? =
 
 * 2.3 and upper are compatible only with WordPress 3.5 !
 * 2.0 and upper are compatible only with WordPress 3.0 & 3.1 & 3.2 & 3.3 !
@@ -61,7 +87,7 @@ The Simple Tags can be installed in 3 easy steps:
 2. Do you have a not yet tagged blog ? Edit mass tags options is perfect for you : tag 20, 30 or 50 articles with autocompletion in one step !
 3. Autotagging your content !
 4. Add tags easily with click tags !
-3. To help you to add easily tags, Simple Tags has an autocompletion script. When you begin to tape a letter or more, a list a tags appears : you have only to choose ! You can choose the down direction to see all the tags.
+3. To help you to add easily tags, Tag Bag has an autocompletion script. When you begin to tape a letter or more, a list a tags appears : you have only to choose ! You can choose the down direction to see all the tags.
 6. You also can suggest tags from lot's of service (Yahoo! Term Extraction API, OpenCalais, Alchemy, Zemanta, Tag The Net, Local DB)
 
 == Changelog ==
@@ -110,7 +136,7 @@ The Simple Tags can be installed in 3 easy steps:
 	* Remove "include cat" on "Related Posts" settings
 	* Optimize function "Related posts"
 	* Reorganize admin for have a tab features with all features available
-	* Use a input text for Simple Tags autocompletion field
+	* Use a input text for Tag Bag autocompletion field
 	* Remove ID of term from autocompletion
 	* Fix autocompletion on mange terms page
 	* Add a field for advanced usage on tagcloud widget
@@ -137,7 +163,7 @@ The Simple Tags can be installed in 3 easy steps:
 	* Restore custom post tags feature : st_the_tags()
 	* Fix a bug with widget taxo option saving
 * Version 2.0-beta1 :
-	* This version is a back to fondamentals. Somes features are removed ! 
+	* This version is a back to fondamentals. Somes features are removed !
 	* This version need testing !
 	* Remove old marker <!--st_tag_cloud-->
 	* Remove related posts
@@ -155,7 +181,7 @@ The Simple Tags can be installed in 3 easy steps:
 * Version 1.8.1 :
 	* Improve uninstaller
 	* Improve code widgets
-	* Improve support of custom taxonomies for simple tags features
+	* Improve support of custom taxonomies for Tag Bag features
 * Version 1.8.0 :
 	* Compatibility 3.0
 	* Add an option for auto-tags
@@ -225,9 +251,9 @@ The Simple Tags can be installed in 3 easy steps:
 	* Fix a small bug with JSON class.
 * Version 1.6.2
 	* Click tags and suggested tags can work with default WordPress Tags.
-	* The Simple Tags auto completion replace default WordPress Tags input.
+	* The Tag Bag auto completion replace default WordPress Tags input.
 	* Restore administration options.
-	* Better management of Simple Tags with WP_Scripts and WP_Styles
+	* Better management of Tag Bag with WP_Scripts and WP_Styles
 	* Add an option for auto link tags.
 	* Fix a potential error with compatibility old markers.
 	* Update french and chineese translation.
@@ -269,7 +295,7 @@ The Simple Tags can be installed in 3 easy steps:
 	* Fix internationalization when reset plugin options (and installation)
 	* Fix auto link feature (word replaced keep original case)
 * Version 1.3.7
-	* Improved performance of Simple Tags (specially Related Posts)
+	* Improved performance of Tag Bag (specially Related Posts)
 * Version 1.3.6
 	* Fix auto tags with all DB and this feature work also for auto tags save feature
 	* Clean lot's url
@@ -403,7 +429,7 @@ The Simple Tags can be installed in 3 easy steps:
 	* Fixes 2-3 minors bugs
 * Version 1.0
 	* Initial version
-	
+
 == Upgrade Notice ==
 
 Nothing to say...
