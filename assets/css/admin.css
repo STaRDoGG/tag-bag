@@ -62,6 +62,13 @@ a#close_clicktags {display: none;}
 	padding: 6px;
 }
 
+/* Active Tag */
+#tb-clicks-tags .container_clicktags .used_term {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
 /* Click Tags */
 .container_clicktags {display:block;}
 .container_clicktags span {

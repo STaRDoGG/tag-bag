@@ -299,7 +299,7 @@ class tagbag_Admin {
 	 */
 	public static function printAdminFooter() {
 		?>
-		<p class="footer_tb"><?php printf(__('<a href="http://wordpress.org/extend/plugins/simple-tags" title="Tag Bag WordPress Plugin" target="_blank">Tag Bag</a> Version %s. | &copy; Copyright 2014 <a href="http://geekdrop.com" title="GeekDrop.com - J. Scott Elblein" target="_blank">J. Scott Elblein</a><br />(<em>A fork of <a href="http://wordpress.org/extend/plugins/simple-tags" target="_blank">SimpleTags</a> by Amaury Balmer</em>)', 'tagbag'), TAGB_VERSION); ?></p>
+		<p class="footer_tb"><?php printf(__('<a href="https://github.com/STaRDoGG/tag-bag" title="Tag Bag WordPress Plugin" target="_blank">Tag Bag</a> Version %s. | &copy; Copyright 2014 <a href="http://about.me/scott.elblein" title="GeekDrop.com - J. Scott Elblein" target="_blank">J. Scott Elblein</a><br />(<em>A fork of <a href="http://wordpress.org/extend/plugins/simple-tags" target="_blank">SimpleTags</a> by Amaury Balmer</em>)', 'tagbag'), TAGB_VERSION); ?></p>
 		<?php
 	}
 

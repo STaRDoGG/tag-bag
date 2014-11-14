@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Tag Bag
-Plugin URI: https://github.com/herewithme/simple-tags
-Description: Extended Tagging for WordPress 3.3+ : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc. NOW Compatible custom post type and custom taxonomy!
-Version: 2.3.3
+Plugin URI: https://github.com/STaRDoGG/tag-bag
+Description: Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc. NOW Compatible custom post type and custom taxonomy!
+Version: 2.4
 Author: J. Scott Elblein
 Author URI: http://geekdrop.com
 Text Domain: tagbag
@@ -33,7 +33,6 @@ Credits Icons :
 Todo:
 	Both:
 	Add option to add list of words to ignore when auto tagging (i.e. why, the, in, to, them, common, meaningless words, etc.). Pretty simple to add, just use an array.
-	http://wordpress.org/support/topic/yahoo-tags-dont-work
 
 	Admin:
 	Client:
@@ -51,10 +50,10 @@ if (version_compare(PHP_VERSION, '5.0.0', '<') ) {
 	}
 
 	// Spit out die messages
-	wp_die(sprintf(__('Your PHP version is too old, please upgrade to a newer version. Your version is %s, Tag Bag requires %s. Remove the plugin from WordPress plugins directory with FTP client.', 'tagbag'), phpversion(), '5.0.0'));
+	wp_die(sprintf(__('Your PHP version is too old, please upgrade to a newer version. Your version is %s, Tag Bag requires %s. Remove the plugin from WordPress plugins directory with a FTP client.', 'tagbag'), phpversion(), '5.0.0'));
 }
 
-define( 'TAGB_VERSION','2.3.3' );
+define( 'TAGB_VERSION','2.4' );
 define( 'TAGB_OPTIONS_NAME','tagbag' );								// Option name for save settings
 define( 'TAGB_OPTIONS_NAME_AUTO','tagbag-auto' );			// Option name for save settings auto terms
 

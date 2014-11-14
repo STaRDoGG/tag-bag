@@ -1,5 +1,6 @@
 <?php
 class tagbag_Admin_AutoTags {
+
 	// Build admin URL
 	static $tools_base_url = '';
 
@@ -34,26 +35,26 @@ class tagbag_Admin_AutoTags {
 
 		// Get options
 		$options = get_option( TAGB_OPTIONS_NAME_AUTO );
-		if ( $options == false ) // First save ?
+		if ($options == false) // First save ?
 			$options = array();
 
-		if ( !isset($options[tagbag_Admin::$post_type]) ) { // First save for this CPT ?
+		if (!isset($options[tagbag_Admin::$post_type])) { // First save for this CPT ?
 			$options[tagbag_Admin::$post_type] = array();
 		}
 
-		if ( !isset($options[tagbag_Admin::$post_type][tagbag_Admin::$taxonomy]) ) { // First save for this taxo ?
+		if (!isset($options[tagbag_Admin::$post_type][tagbag_Admin::$taxonomy])) { // First save for this taxo ?
 			$options[tagbag_Admin::$post_type][tagbag_Admin::$taxonomy] = array();
 		}
 
 		$taxo_options = $options[tagbag_Admin::$post_type][tagbag_Admin::$taxonomy]; // Edit local option taxo
 
 		$action = false;
-		if ( isset($_POST['update_auto_list']) ) {
+		if (isset($_POST['update_auto_list'])) {
 			check_admin_referer('update_auto_list-tagbag');
 
 			// Tags list
-			$terms_list = stripslashes($_POST['auto_list']);
-			$terms = explode(',', $terms_list);
+			$terms_list	= stripslashes($_POST['auto_list']);
+			$terms			= explode(',', $terms_list);
 
 			// Remove empty and duplicate elements
 			$terms = array_filter($terms, '_delete_empty_element');
@@ -61,31 +62,34 @@ class tagbag_Admin_AutoTags {
 
 			$taxo_options['auto_list'] = maybe_serialize($terms);
 
-			// Active auto terms ?
-			$taxo_options['use_auto_terms'] = ( isset($_POST['use_auto_terms']) && $_POST['use_auto_terms'] == '1' ) ? '1' : '0';
+			// Active auto terms?
+			$taxo_options['use_auto_terms'] = (isset($_POST['use_auto_terms']) && $_POST['use_auto_terms'] == '1') ? '1' : '0';
 
-			// All terms ?
-			$taxo_options['at_all'] = ( isset($_POST['at_all']) && $_POST['at_all'] == '1' ) ? '1' : '0';
+			// All terms?
+			$taxo_options['at_all'] = (isset($_POST['at_all']) && $_POST['at_all'] == '1') ? '1' : '0';
 
-			// Empty only ?
-			$taxo_options['at_empty'] = ( isset($_POST['at_empty']) && $_POST['at_empty'] == '1' ) ? '1' : '0';
+			// Empty only?
+			$taxo_options['at_empty'] = (isset($_POST['at_empty']) && $_POST['at_empty'] == '1') ? '1' : '0';
 
-			// Full word ?
-			$taxo_options['only_full_word'] = ( isset($_POST['only_full_word']) && $_POST['only_full_word'] == '1' ) ? '1' : '0';
+			// Full word?
+			$taxo_options['only_full_word'] = (isset($_POST['only_full_word']) && $_POST['only_full_word'] == '1') ? '1' : '0';
+
+			// Support hashtag format?
+			$taxo_options['allow_hashtag_format'] = (isset($_POST['allow_hashtag_format']) && $_POST['allow_hashtag_format'] == '1') ? '1' : '0';
 
 			$options[tagbag_Admin::$post_type][tagbag_Admin::$taxonomy] = $taxo_options;
 			update_option( TAGB_OPTIONS_NAME_AUTO, $options );
 
 			add_settings_error( __CLASS__, __CLASS__, __('Auto terms options updated !', 'tagbag'), 'updated' );
-		} elseif ( isset($_GET['action']) && $_GET['action'] == 'auto_tag' ) {
+		} elseif (isset($_GET['action']) && $_GET['action'] == 'auto_tag') {
 			$action = true;
-			$n = ( isset($_GET['n']) ) ? intval($_GET['n']) : 0;
+			$n = (isset($_GET['n'])) ? intval($_GET['n']) : 0;
 		}
 
 		$terms_list = '';
-		if ( isset($taxo_options['auto_list']) && !empty($taxo_options['auto_list']) ) {
+		if (isset($taxo_options['auto_list']) && !empty($taxo_options['auto_list'])) {
 			$terms = maybe_unserialize($taxo_options['auto_list']);
-			if ( is_array($terms) ) {
+			if (is_array($terms)) {
 				$terms_list = implode(', ', $terms);
 			}
 		}
@@ -94,7 +98,7 @@ class tagbag_Admin_AutoTags {
 		?>
 		<div class="wrap tb_wrap">
 			<h2><?php _e('Overview', 'tagbag'); ?>
-			<p><?php _e('The bulb are lit when the association taxonomy and custom post type have the classification automatic activated. Otherwise, the bulb is off.', 'tagbag'); ?>
+			<p><?php _e('The bulb is lit when the association taxonomy and custom post type have the classification automatic activated. Otherwise, the bulb is dimmed.', 'tagbag'); ?>
 			<table class="widefat tag fixed" cellspacing="0">
 				<thead>
 					<tr>
@@ -103,7 +107,6 @@ class tagbag_Admin_AutoTags {
 						foreach ( get_taxonomies( array( 'show_ui' => true ), 'object' ) as $taxo ) {
 							if ( empty($taxo->labels->name) )
 								continue;
-
 							echo '<th scope="col">'.esc_html($taxo->labels->name).'</th>';
 						}
 						?>
@@ -116,7 +119,6 @@ class tagbag_Admin_AutoTags {
 						foreach ( get_taxonomies( array( 'show_ui' => true ), 'object' ) as $taxo ) {
 							if ( empty($taxo->labels->name) )
 								continue;
-
 							echo '<th scope="col">'.esc_html($taxo->labels->name).'</th>';
 						}
 						?>
@@ -125,8 +127,9 @@ class tagbag_Admin_AutoTags {
 
 				<tbody id="the-list" class="list:taxonomies">
 					<?php
-					$class = 'alternate';
-					$i = 0;
+					$class	= 'alternate';
+					$i			= 0;
+
 					foreach ( get_post_types( array(), 'objects' ) as $post_type ) :
 						if ( !$post_type->show_ui || empty($post_type->labels->name) ) {
 							continue;
@@ -137,7 +140,6 @@ class tagbag_Admin_AutoTags {
 						if ( empty($compatible_taxonomies) ) {
 							continue;
 						}
-
 
 						$i++;
 						$class = ( $class == 'alternate' ) ? '' : 'alternate';
@@ -176,7 +178,7 @@ class tagbag_Admin_AutoTags {
 			<?php if ( $action === false ) : ?>
 
 				<h3><?php _e('Auto terms list', 'tagbag'); ?></h3>
-				<p><?php _e('This feature allows Wordpress to look into post content and title for specified terms when saving posts. If your post content or title contains the word "WordPress" and you have "wordpress" in auto terms list, Tag Bag will add automatically "wordpress" as term for this post.', 'tagbag'); ?></p>
+				<p><?php _e('This feature allows Wordpress to examine the post content and title for specified terms when saving posts, if your post content or title contains the word "WordPress" and you have "wordpress" in auto terms list, Tag Bag will automatically add "wordpress" as a term for this post.', 'tagbag'); ?></p>
 
 				<h3><?php _e('Options', 'tagbag'); ?></h3>
 				<form action="<?php echo self::$tools_base_url.'tb_auto&taxo='.tagbag_Admin::$taxonomy.'&cpt='.tagbag_Admin::$post_type; ?>" method="post">
@@ -192,25 +194,32 @@ class tagbag_Admin_AutoTags {
 							<th scope="row"><?php _e('Terms database', 'tagbag'); ?></th>
 							<td>
 								<input type="checkbox" id="at_all" name="at_all" value="1" <?php echo ( isset($taxo_options['at_all']) && $taxo_options['at_all'] == 1 ) ? 'checked="checked"' : ''; ?>  />
-								<label for="at_all"><?php _e('Use also local terms database with auto terms. (Warning, this option can increases the CPU consumption a lot if you have many terms)', 'tagbag'); ?></label>
+								<label for="at_all"><?php _e('Also use local terms database with auto terms. (Warning, this option can increases the CPU consumption a lot if you have many terms)', 'tagbag'); ?></label>
 							</td>
 						</tr>
 						<tr valign="top">
 							<th scope="row"><?php _e('Target', 'tagbag'); ?></th>
 							<td>
 								<input type="checkbox" id="at_empty" name="at_empty" value="1" <?php echo ( isset($taxo_options['at_empty']) && $taxo_options['at_empty'] == 1 ) ? 'checked="checked"' : ''; ?>  />
-								<label for="at_empty"><?php _e('Autotag only posts without terms.', 'tagbag'); ?></label>
+								<label for="at_empty"><?php _e('Auto-tag only posts without terms.', 'tagbag'); ?></label>
 							</td>
 						</tr>
 						<tr valign="top">
-							<th scope="row"><?php _e('Whole Word ?', 'tagbag'); ?></th>
+							<th scope="row"><?php _e('Whole Word?', 'tagbag'); ?></th>
 							<td>
 								<input type="checkbox" id="only_full_word" name="only_full_word" value="1" <?php echo ( isset($taxo_options['only_full_word']) && $taxo_options['only_full_word'] == 1 ) ? 'checked="checked"' : ''; ?>  />
-								<label for="only_full_word"><?php _e('Autotag only a post when terms finded in the content are a the same name. (whole word only)', 'tagbag'); ?></label>
+								<label for="only_full_word"><?php _e('Auto-tag only a post when terms found in the content are the same name. (whole word only)', 'tagbag'); ?></label>
 							</td>
 						</tr>
 						<tr valign="top">
-							<th scope="row"><label for="auto_list"><?php _e('Keywords list', 'tagbag'); ?></label></th>
+							<th scope="row"><?php _e('Hashtag Support?', 'tagbag'); ?></th>
+							<td>
+								<input type="checkbox" id="allow_hashtag_format" name="allow_hashtag_format" value="1" <?php echo ( isset($taxo_options['allow_hashtag_format']) && $taxo_options['allow_hashtag_format'] == 1 ) ? 'checked="checked"' : ''; ?> />
+								<label for="allow_hashtag_format"><?php _e('When the whole word option is enabled, hashtags will not be auto-tagged because of the # prefix. This option fixes this issue.', 'tagbag'); ?></label>
+							</td>
+						</tr>
+						<tr valign="top">
+							<th scope="row"><label for="auto_list"><?php _e('Keyword List', 'tagbag'); ?></label></th>
 							<td>
 								<input type="text" id="auto_list" class="auto_list" name="auto_list" value="<?php echo esc_attr($terms_list); ?>" style="width:98%;" />
 								<br /><?php _e('Separated with a comma', 'tagbag'); ?>
@@ -269,7 +278,7 @@ class tagbag_Admin_AutoTags {
 
 			endif;
 			?>
-			<p><?php _e('Visit the <a href="https://github.com/herewithme/simple-tags">plugin\'s homepage</a> for further details. If you find a bug, or have a fantastic idea for this plugin, <a href="mailto:amaury@wordpress-fr.net">ask me</a> !', 'tagbag'); ?></p>
+			<p><?php _e('Visit the <a href="https://github.com/STaRDoGG/tag-bag">plugin\'s homepage</a> for further details. If you find a bug, or have a fantastic idea for this plugin, <a href="https://github.com/STaRDoGG/tag-bag/issues">mention it</a>.', 'tagbag'); ?></p>
 			<?php tagbag_Admin::printAdminFooter(); ?>
 		</div>
 		<?php

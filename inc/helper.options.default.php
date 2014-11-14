@@ -21,15 +21,17 @@ return array(
 	'auto_link_priority'		=> 12,
 	'auto_link_views'				=> 'singular',
 	'auto_link_dom'					=> 0,
+	'auto_link_title'				=> __('Posts tagged with %s', 'tagbag'),
 
 	// Administration
 	'order_click_tags'				=> 'name-asc',
 	'opencalais_key'					=> '',
 	'datatxt_key'							=> '',
 	'datatxt_id'							=> '',
-	'datatxt_min_confidence'	=> '',
+	'datatxt_min_confidence'	=> '0.6',
 	'alchemy_api'							=> '',
 	'zemanta_key'							=> '',
+	'tag4site_key'						=> '',
 	'autocomplete_type'				=> 'input',
 	'autocomplete_min'				=> 0,
 	'autocomplete_mode'				=> '',

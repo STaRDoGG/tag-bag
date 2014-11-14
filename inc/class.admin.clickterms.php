@@ -89,31 +89,32 @@ class tagbag_Admin_ClickTags {
 		}
 
 		// Prepare search
-		$search = ( isset($_GET['q']) ) ? trim(stripslashes($_GET['q'])) : '';
+		$search		= (isset($_GET['q']) ) ? trim(stripslashes($_GET['q'])) : '';
+		$post_id	= (isset($_GET['post_id']) ) ? intval($_GET['post_id']) : 0;
 
 		// Order tags before selection (count-asc/count-desc/name-asc/name-desc/random)
 		$order_click_tags = strtolower(tagbag_Plugin::get_option_value('order_click_tags'));
 		$order_by = $order = '';
 		switch ( $order_click_tags ) {
 			case 'count-asc':
-				$order_by = 'tt.count';
-				$order = 'ASC';
+				$order_by	= 'tt.count';
+				$order		= 'ASC';
 				break;
 			case 'random':
-				$order_by = 'RAND()';
-				$order = '';
+				$order_by	= 'RAND()';
+				$order		= '';
 				break;
 			case 'count-desc':
-				$order_by = 'tt.count';
-				$order = 'DESC';
+				$order_by	= 'tt.count';
+				$order		= 'DESC';
 				break;
 			case 'name-desc':
-				$order_by = 't.name';
-				$order = 'DESC';
+				$order_by	= 't.name';
+				$order		= 'DESC';
 				break;
 			default : // name-asc
-				$order_by = 't.name';
-				$order = 'ASC';
+				$order_by	= 't.name';
+				$order		= 'ASC';
 			  break;
 		}
 
@@ -124,43 +125,42 @@ class tagbag_Admin_ClickTags {
 			echo '<p>'.__('No results from your WordPress database.', 'tagbag').'</p>';
 			exit();
 		}
-/*var_dump($wp_query);
-echo $wp_query->post->ID;*/
+
+		// Get terms for current post
+		$post_terms = array();
+		if ( $post_id > 0 ) {
+			$post_terms = wp_get_post_terms( $post_id, 'post_tag', array('fields' => 'ids') );
+		}
 
 		foreach ( (array) $terms as $term ) {
-/*				echo 'Page ID (Get Post): ' . $_GET['post'] . ' The ID: ' . the_ID() . ' Get The ID: ' . get_the_ID();*/
 
-			$strDescription = "";
-			$strActive = "local";
+			$class_current	= in_array( $term->term_id, $post_terms ) ? 'used_term' : '';
+
+			$strDescription	= "";
 
 			// Return either the singular or plural version of the word
 			$strPlural = ($term->count <> 1) ? "posts" : "post";
 
-			if (has_tag($term->name, $_GET['post']) == TRUE) {
-				/* In theory, if this tag is already set for this post, then use a different class (so we can highlight it with CSS)
-				   HOWEVER, echo, the_ID, and get_the_ID all return jack shit (blank) and I have no idea why. even console.log spits out an error instead of showing in Firebug
-				*/
-			  $strActive = "local-active";
+			/* If there's a description with the tag, add it to the tool-tip as well.
+			 * Note: The multi-lines, empty spaces & starting the lines at the first column are required for proper tool-tip formatting, so don't change them.
+			 */
+
+			// Clean it up first
+	    $strEscaped = esc_attr($term->description);
+	    if (!empty($strEscaped)) {
+	    	$strDescription = "
+
+	$strEscaped
+
+	";
 			}
 
-      /* If there's a description with the tag, add it to the tool-tip as well.
-       * Note: The multi-lines, empty spaces & starting the lines at the first column are required for proper tool-tip formatting, so don't change them.
-       */
-      // Clean it up first
-      $strEscaped = esc_attr($term->description);
-      if (!empty($strEscaped)) {
-      	$strDescription = "
-
-$strEscaped
-
-";
-      }
-
 			/* TODO: Replace this basic tooltip with a nice jQuery one, with HTML in it using: http://iamceege.github.io/tooltipster
-			 I'd like to add links in it to link to the page were all those tags are on, as well as it's Edit page, and whatever else would be useful, as well as some nice styling. */
+			 * I'd like to add links in it to link to the page were all those tags are on, as well as it's Edit page, and whatever else would be useful, as well as some * nice styling.
+			 */
 
 			// Create and show the actual tag now
-      echo '<span class="'.$strActive.'" title="'.' '.$term->count.' '.$strPlural.' '.$strDescription.'">'.esc_html(stripslashes($term->name)).'</span>'."\n";
+			echo '<span class="local '.$class_current.'" title="'.' '.$term->count.' '.$strPlural.' '.$strDescription.'">'.esc_html(stripslashes($term->name)).'</span>'."\n";
 		}
 		echo '<div class="clear"></div>';
 		exit();

@@ -89,16 +89,20 @@ class tagbag_Client_Autoterms {
 		// Auto term with specific auto terms list
 		if ( isset($options['auto_list']) ) {
 			$terms = (array) maybe_unserialize($options['auto_list']);
-			foreach ( $terms as $term ) {
-				if ( !is_string($term) && empty($term) ) {
+			foreach ($terms as $term) {
+				if (!is_string($term) && empty($term)) {
 				 	continue;
 				}
 
 				$term = trim($term);
 
-				// Whole word ?
-				if ( (int) $options['only_full_word'] == 1 ) {
-					if ( preg_match("/\b".$term."\b/i", $content) ) {
+				// Whole word?
+				if (isset($options['only_full_word']) && (int) $options['only_full_word'] == 1) {
+					if (preg_match("/\b".$term."\b/i", $content)) {
+						$terms_to_add[] = $term;
+					}
+
+					if (isset($options['allow_hashtag_format']) && (int) $options['allow_hashtag_format'] == 1 && stristr($content, '#'.$term)) {
 						$terms_to_add[] = $term;
 					}
 				} elseif ( stristr($content, $term) ) {
@@ -125,12 +129,16 @@ class tagbag_Client_Autoterms {
 				 	continue;
 				}
 
-				// Whole word?
-				if ( (int) $options['only_full_word'] == 1 ) {
-					$term = ' '.$term.' '; // Add space before and after!
-				}
+				// Whole word ?
+				if ( isset($options['only_full_word']) && (int) $options['only_full_word'] == 1 ) {
+					if ( preg_match("/\b".$term."\b/i", $content) ) {
+						$terms_to_add[] = $term;
+					}
 
-				if ( stristr($content, $term) ) {
+					if ( isset($options['allow_hashtag_format']) && (int) $options['allow_hashtag_format'] == 1 && stristr($content, '#'.$term) ) {
+						$terms_to_add[] = $term;
+					}
+				} elseif ( stristr($content, $term) ) {
 					$terms_to_add[] = $term;
 				}
 			}

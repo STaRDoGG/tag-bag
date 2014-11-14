@@ -17,11 +17,12 @@ class tagbag_Client_TagCloud {
 	public static function shortcode( $atts ) {
 		extract(shortcode_atts(array('param' => ''), $atts));
 
+		$param = html_entity_decode($param);
 		$param = trim($param);
-		if ( empty($param) ) {
+
+		if (empty($param)) {
 			$param = 'title=';
 		}
-
 		return self::extendedTagCloud( $param, false );
 	}
 
@@ -42,29 +43,29 @@ class tagbag_Client_TagCloud {
 	 * @param string $args
 	 * @return string|array
 	 */
-	public static function extendedTagCloud( $args = '', $copyright = true ) {
+	public static function extendedTagCloud($args = '', $copyright = true) {
 		$defaults = array(
-			'taxonomy' 	  => 'post_tag',
-			'size'		  => 'true',
-			'smallest' 	  => 8,
-			'largest' 	  => 22,
-			'unit' 		  => 'pt',
-			'color' 	  => 'true',
-			'maxcolor' 	  => '#000000',
-			'mincolor' 	  => '#CCCCCC',
-			'number' 	  => 45,
-			'format' 	  => 'flat',
-			'selectionby' => 'count',
-			'selection'   => 'desc',
-			'orderby'	  => 'random',
-			'order'		  => 'asc',
-			'exclude' 	  => '',
-			'include' 	  => '',
+			'taxonomy'		=> 'post_tag',
+			'size'				=> 'true',
+			'smallest'		=> 8,
+			'largest'			=> 22,
+			'unit'				=> 'pt',
+			'color'				=> 'true',
+			'maxcolor'		=> '#000000',
+			'mincolor'		=> '#CCCCCC',
+			'number'			=> 45,
+			'format'			=> 'flat',
+			'selectionby'	=> 'count',
+			'selection'		=> 'desc',
+			'orderby'			=> 'random',
+			'order'				=> 'asc',
+			'exclude'			=> '',
+			'include'			=> '',
 			'limit_days'  => 0,
-			'min_usage'   => 0,
-			'notagstext'  => __('No tags.', 'tagbag'),
-			'xformat' 	  => __('<a href="%tag_link%" id="tag-link-%tag_id%" class="tb-tags t%tag_scale%" title="%tag_count% topics" %tag_rel% style="%tag_size% %tag_color%">%tag_name%</a>', 'tagbag'),
-			'title' 	  => __('<h4>Tag Cloud</h4>', 'tagbag'),
+			'min_usage'		=> 0,
+			'notagstext'	=> __('No tags.', 'tagbag'),
+			'xformat'			=> __('<a href="%tag_link%" id="tag-link-%tag_id%" class="tb-tags t%tag_scale%" title="%tag_count% topics" %tag_rel% style="%tag_size% %tag_color%">%tag_name%</a>', 'tagbag'),
+			'title'				=> __('<h4>Tag Cloud</h4>', 'tagbag'),
 			'category' 	  => 0
 		);
 
@@ -93,7 +94,31 @@ class tagbag_Client_TagCloud {
 		}
 		$args = wp_parse_args( $args, $defaults );
 
-		// Get correct taxonomy ?
+		// Add compatibility tips with old field syntax
+		if ( isset($args['cloud_sort']) ) {
+			$args['cloud_order'] = $args['cloud_sort'];
+			unset($args['cloud_sort']);
+		}
+
+		// Translate selection order
+		if (isset($args['cloud_order'])) {
+			$args['orderby']	= self::compatOldOrder($args['cloud_order'], 'orderby');
+			$args['order']		= self::compatOldOrder($args['cloud_order'], 'order');
+		}
+
+		// Category names to ID codes
+		if ( isset($args['category']) ) {
+			$category = explode(",", $args['category']);
+			foreach ($category as $key => $name) {
+				$category[$key] = is_numeric($name) ? $name : get_cat_ID($name);
+				if ( $category[$key] == 0 ) {
+					unset($category[$key]);
+				}
+			}
+			$args['category'] = implode(",", $category);
+		}
+
+		// Get correct taxonomy?
 		$taxonomy = self::_get_current_taxonomy($args['taxonomy']);
 
 		// Get terms
@@ -106,8 +131,8 @@ class tagbag_Client_TagCloud {
 		}
 
 		// Clean memory
-		$args = array();
-		$defaults = array();
+		$args			= array();
+		$defaults	= array();
 		unset($args, $defaults);
 
 		if ( empty($terms) ) {
@@ -116,8 +141,8 @@ class tagbag_Client_TagCloud {
 
 		$counts = $terms_data = array();
 		foreach ( (array) $terms as $term ) {
-			$counts[$term->name] = $term->count;
-			$terms_data[$term->name] = $term;
+			$counts[$term->name]			= $term->count;
+			$terms_data[$term->name]	= $term;
 		}
 
 		// Remove temp data from memory
